@@ -143,8 +143,10 @@ extern RemoteDebug Debug;
 #define PIN_RS485_TX 21
 #define PIN_CP_OUT 19
 #define PIN_ACTB 18
-#define PIN_LCD_RST 5
-#define PIN_ACTA 17
+//#define PIN_LCD_RST 5
+#define PIN_LCD_SDA 5
+#define PIN_LCD_SCL 17
+//#define PIN_ACTA 17
 #define PIN_SW_IN 16
 #define PIN_LEDG 4
 #define PIN_IO0_B1 0
@@ -286,9 +288,9 @@ extern RemoteDebug Debug;
 #define BACKLIGHT_ON digitalWrite(PIN_LCD_LED, HIGH);
 #define BACKLIGHT_OFF digitalWrite(PIN_LCD_LED, LOW);
 
-#define ACTUATOR_LOCK { digitalWrite(PIN_ACTB, HIGH); digitalWrite(PIN_ACTA, LOW); }
-#define ACTUATOR_UNLOCK { digitalWrite(PIN_ACTB, LOW); digitalWrite(PIN_ACTA, HIGH); }
-#define ACTUATOR_OFF { digitalWrite(PIN_ACTB, HIGH); digitalWrite(PIN_ACTA, HIGH); }
+//#define ACTUATOR_LOCK { digitalWrite(PIN_ACTB, HIGH); digitalWrite(PIN_ACTA, LOW); }
+//#define ACTUATOR_UNLOCK { digitalWrite(PIN_ACTB, LOW); digitalWrite(PIN_ACTA, HIGH); }
+//#define ACTUATOR_OFF { digitalWrite(PIN_ACTB, HIGH); digitalWrite(PIN_ACTA, HIGH); }
 
 #define ONEWIRE_LOW { digitalWrite(PIN_SW_IN, LOW); pinMode(PIN_SW_IN, OUTPUT); }   // SW set to 0, set to output (driven low)
 #define ONEWIRE_HIGH { digitalWrite(PIN_SW_IN, HIGH); pinMode(PIN_SW_IN, OUTPUT); } // SW set to 1, set to output (driven high)
@@ -376,8 +378,8 @@ extern RemoteDebug Debug;
 
 #define MENU_STATE 50
 
-#define _RSTB_0 digitalWrite(PIN_LCD_RST, LOW);
-#define _RSTB_1 digitalWrite(PIN_LCD_RST, HIGH);
+//#define _RSTB_0 digitalWrite(PIN_LCD_RST, LOW);
+//#define _RSTB_1 digitalWrite(PIN_LCD_RST, HIGH);
 #define _A0_0 digitalWrite(PIN_LCD_A0_B2, LOW);
 #define _A0_1 digitalWrite(PIN_LCD_A0_B2, HIGH);
 

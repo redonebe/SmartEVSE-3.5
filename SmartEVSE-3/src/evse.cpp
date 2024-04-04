@@ -44,6 +44,8 @@
 #include "OneWire.h"
 #include "modbus.h"
 
+#include <Wire.h>
+#include "ssd1306.h"
 #if MQTT
 #include <MQTT.h>
 WiFiClient client;
@@ -2325,9 +2327,9 @@ uint8_t PollEVNode = NR_EVSES, updated = 0;
 
             // UnlockCable takes precedence over LockCable
             if (UnlockCable) {
-                if (unlocktimer < 6) {                              // 600ms pulse
-                    ACTUATOR_UNLOCK;
-                } else ACTUATOR_OFF;
+            //    if (unlocktimer < 6) {                              // 600ms pulse
+            //        ACTUATOR_UNLOCK;
+            //    } else ACTUATOR_OFF;
                 if (unlocktimer++ > 7) {
                     if (digitalRead(PIN_LOCK_IN) == lock1 )         // still locked...
                     {
@@ -2337,9 +2339,9 @@ uint8_t PollEVNode = NR_EVSES, updated = 0;
                 locktimer = 0;
             // Lock Cable    
             } else if (LockCable) { 
-                if (locktimer < 6) {                                // 600ms pulse
-                    ACTUATOR_LOCK;
-                } else ACTUATOR_OFF;
+                // if (locktimer < 6) {                                // 600ms pulse
+                //     ACTUATOR_LOCK;
+                // } else ACTUATOR_OFF;
                 if (locktimer++ > 7) {
                     if (digitalRead(PIN_LOCK_IN) == lock2 )         // still unlocked...
                     {
@@ -4583,7 +4585,7 @@ void setup() {
     pinMode(PIN_RCM_FAULT, INPUT_PULLUP);   
 
     pinMode(PIN_LCD_LED, OUTPUT);           // LCD backlight
-    pinMode(PIN_LCD_RST, OUTPUT);           // LCD reset
+    //pinMode(PIN_LCD_RST, OUTPUT);           // LCD reset
     pinMode(PIN_IO0_B1, INPUT);             // < button
     pinMode(PIN_LCD_A0_B2, OUTPUT);         // o Select button + A0 LCD
     pinMode(PIN_LCD_SDO_B3, OUTPUT);        // > button + SDA/MOSI pin
@@ -4592,7 +4594,7 @@ void setup() {
     pinMode(PIN_LEDR, OUTPUT);              // Red LED output
     pinMode(PIN_LEDG, OUTPUT);              // Green LED output
     pinMode(PIN_LEDB, OUTPUT);              // Blue LED output
-    pinMode(PIN_ACTA, OUTPUT);              // Actuator Driver output R
+    //pinMode(PIN_ACTA, OUTPUT);              // Actuator Driver output R
     pinMode(PIN_ACTB, OUTPUT);              // Actuator Driver output W
     pinMode(PIN_CPOFF, OUTPUT);             // Disable CP output (active high)
     pinMode(PIN_RS485_RX, INPUT);
@@ -4602,7 +4604,7 @@ void setup() {
     digitalWrite(PIN_LEDR, LOW);
     digitalWrite(PIN_LEDG, LOW);
     digitalWrite(PIN_LEDB, LOW);
-    digitalWrite(PIN_ACTA, LOW);
+    //digitalWrite(PIN_ACTA, LOW);
     digitalWrite(PIN_ACTB, LOW);        
     digitalWrite(PIN_SSR, LOW);             // SSR1 OFF
     digitalWrite(PIN_SSR2, LOW);            // SSR2 OFF

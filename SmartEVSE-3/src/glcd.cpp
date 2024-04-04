@@ -35,8 +35,19 @@
 
 #include "font.cpp"
 #include "font2.cpp"
+/*Own mods*/
+#include "ssd1306.h"
+SAppMenu menu;
 
-
+const char *menuItems[] =
+{
+    "draw bitmap",
+    "sprites",
+    "fonts",
+    "canvas gfx",
+    "draw lines",
+};
+/*Own mods end*/
 const unsigned char LCD_Flow [] = {
 0x00, 0x00, 0x98, 0xCC, 0x66, 0x22, 0x22, 0x22, 0xF2, 0xAA, 0x26, 0x2A, 0xF2, 0x22, 0x22, 0x22,
 0x66, 0xCC, 0x88, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -1180,7 +1191,7 @@ void GLCDMenu(uint8_t Buttons) {
 
 
 void GLCD_init(void) {
-    delay(200);                                                                 // transients on the line could have garbled the LCD, wait 200ms then re-init.
+   /*  delay(200);                                                                 // transients on the line could have garbled the LCD, wait 200ms then re-init.
     _A0_0;                                                                      // A0=0
     _RSTB_0;                                                                    // Reset GLCD module
     delayMicroseconds(4);
@@ -1208,7 +1219,11 @@ void GLCD_init(void) {
     goto_row(0x00);                                                             // (3) Set page address
     goto_col(0x00);                                                             // (4) Set column addr LSB
  
-    st7565_command(0xAF);                                                       // (1) ON command
-
+    st7565_command(0xAF);          */                                              // (1) ON command
+    ssd1306_128x64_i2c_initEx(PIN_LCD_SCL,PIN_LCD_SDA,0x3C);
+    ssd1306_clearScreen();
+    ssd1306_createMenu( &menu, menuItems, sizeof(menuItems) / sizeof(char *) );
+    ssd1306_showMenu( &menu );
+    
 }
 
